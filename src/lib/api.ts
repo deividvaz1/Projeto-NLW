@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: 'projeto-nlw-eight.vercel.app',
+  baseURL: 'http://10.52.4.181:3333/',
 })
