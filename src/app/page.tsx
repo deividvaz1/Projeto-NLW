@@ -10,7 +10,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import Delete from '@/components/Delete'
-import Edit from '@/components/edite'
+import Edit from '@/components/Edite'
 
 dayjs.locale(ptBr)
 
