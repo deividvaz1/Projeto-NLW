@@ -1,56 +1,50 @@
 'use client'
 
 import { api } from '@/lib/api'
-
 import dayjs from 'dayjs'
-
 import ptBR from 'dayjs/locale/pt-br'
-
 import Cookie from 'js-cookie'
-
 import { ChevronLeft } from 'lucide-react'
-
 import Image from 'next/image'
-
 import { useRouter } from 'next/navigation'
-
 import Link from 'next/link'
 
 dayjs.locale(ptBR)
 
 interface Memory {
   id: string
-
   coverUrl: string
-
   excerpt: string
-
   createdAt: string
 }
 
-export async function getStaticProps() {
+interface MemoriesPageProps {
+  memories: Memory[]
+}
+
+interface MemoryPageProps {
+  memory: Memory
+}
+
+export async function getStaticProps({ params }) {
   try {
     const token = Cookie.get('token')
-
-    const response = await api.get('/memories', {
+    const response = await api.get(`/memories/${params.id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-
-    const memories: Memory[] = response.data
-
+    const memory: Memory = response.data
     return {
       props: {
-        memories,
+        memory,
       },
     }
   } catch (error) {
-    console.error('Error fetching memories:', error)
-
+    console.error('Error fetching memory:', error)
     return {
       props: {
-        memories: [],
+        memory: null,
       },
     }
   }
@@ -59,41 +53,24 @@ export async function getStaticProps() {
 export async function getStaticPaths() {
   try {
     const token = Cookie.get('token')
-
     const response = await api.get('/memories', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-
     const memories: Memory[] = response.data
-
     const paths = memories.map((memory) => ({
       params: { id: memory.id },
     }))
-
     return { paths, fallback: false }
   } catch (error) {
     console.error('Error fetching memories:', error)
-
     return { paths: [], fallback: false }
   }
 }
 
-export default async function Memories({ params }) {
+const MemoryPage: React.FC<MemoryPageProps> = ({ memory }) => {
   const router = useRouter()
-
-  const token = Cookie.get('token')
-
-  console.log(params)
-
-  const response = await api.get(`/memories/${params.id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-
-  const memories: Memory[] = response.data
 
   if (router.isFallback) {
     return <div>Carregando...</div>
@@ -109,24 +86,26 @@ export default async function Memories({ params }) {
           <ChevronLeft className="h-4 w-4" />
           Voltar à Timeline
         </Link>
-        <div key={memories.id} className="space-y-4">
+        <div key={memory.id} className="space-y-4">
           <div className="flex justify-between">
             <time className="-ml-8 flex items-center gap-2 text-sm text-gray-100 before:h-px before:w-5 before:bg-gray-50">
-              {dayjs(memories.createdAt).format('D[ de ]MMMM[, ]YYYY')}
+              {dayjs(memory.createdAt).format('D[ de ]MMMM[, ]YYYY')}
             </time>
           </div>
           <Image
-            src={memories.coverUrl}
+            src={memory.coverUrl}
             alt=""
             width={592}
             height={280}
             className="aspect-video w-full rounded-lg object-cover"
           />
           <p className="break-words text-lg leading-relaxed text-gray-100">
-            {memories.content}
+            {memory.content}
           </p>
         </div>
       </div>
     </div>
   )
 }
+
+export default MemoryPage
