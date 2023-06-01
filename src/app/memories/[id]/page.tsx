@@ -1,25 +1,37 @@
 'use client'
+
 import { api } from '@/lib/api'
+
 import dayjs from 'dayjs'
+
 import ptBR from 'dayjs/locale/pt-br'
+
 import Cookie from 'js-cookie'
+
 import { ChevronLeft } from 'lucide-react'
+
 import Image from 'next/image'
-import { useRouter } from 'next/router' // Correction: It should be 'next/router' instead of 'next/navigation'
+
+import { useRouter } from 'next/navigation'
+
 import Link from 'next/link'
 
 dayjs.locale(ptBR)
 
 interface Memory {
   id: string
+
   coverUrl: string
+
   excerpt: string
+
   createdAt: string
 }
 
 export async function getStaticProps() {
   try {
     const token = Cookie.get('token')
+
     const response = await api.get('/memories', {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -47,6 +59,7 @@ export async function getStaticProps() {
 export async function getStaticPaths() {
   try {
     const token = Cookie.get('token')
+
     const response = await api.get('/memories', {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -67,8 +80,9 @@ export async function getStaticPaths() {
   }
 }
 
-async function Memories({ params }) {
+export default async function Memories({ params }) {
   const router = useRouter()
+
   const token = Cookie.get('token')
 
   console.log(params)
@@ -79,7 +93,7 @@ async function Memories({ params }) {
     },
   })
 
-  const memory: Memory = response.data
+  const memories: Memory[] = response.data
 
   if (router.isFallback) {
     return <div>Carregando...</div>
@@ -109,7 +123,7 @@ async function Memories({ params }) {
             className="aspect-video w-full rounded-lg object-cover"
           />
           <p className="break-words text-lg leading-relaxed text-gray-100">
-            {memory.content}
+            {memories.content}
           </p>
         </div>
       </div>
