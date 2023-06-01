@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import Delete from '@/components/Delete'
 import Edit from '@/components/Edite'
+import { AutorMemorie } from '@/components/AutorMemorie'
 
 dayjs.locale(ptBr)
 
@@ -69,6 +70,7 @@ export default async function Home() {
               height={280}
               className="aspect-video w-full rounded-lg object-cover"
             />
+            <AutorMemorie />
             <p className="text-lg leading-relaxed text-gray-100">
               {' '}
               {memory.excerpt}
