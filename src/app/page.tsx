@@ -1,7 +1,6 @@
 // TypeScript + JSX = TSX
 // JSX = JavaScript + XML
 
-import { EmptyMemories } from '@/components/EmptyMemories'
 import { api } from '@/lib/api'
 import { cookies } from 'next/headers'
 import dayjs from 'dayjs'
@@ -12,6 +11,7 @@ import { ArrowRight } from 'lucide-react'
 import Delete from '@/components/Delete'
 import Edita from '@/components/Edita'
 import { AutorMemorie } from '@/components/AutorMemorie'
+import { EmptyMemories } from '@/components/EmptyMemories'
 
 dayjs.locale(ptBr)
 
