@@ -16,6 +16,7 @@ interface Memory {
   coverUrl: string
   excerpt: string
   createdAt: string
+  content: string // Add this line
 }
 
 interface MemoryPageProps {
