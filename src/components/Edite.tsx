@@ -7,6 +7,8 @@ import { Camera } from 'lucide-react'
 interface EditMemoryProps {
   id: string
   token: any
+  setMemories: (memories: any) => void // Adicione a propriedade setMemories ao tipo
+  memories: any
   initialContent: string
   initialCoverUrl: string
   initialIsPublic: boolean
