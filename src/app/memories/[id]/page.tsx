@@ -1,13 +1,12 @@
 'use client'
 
-import { api } from '@/lib/api'
-import dayjs from 'dayjs'
-import ptBR from 'dayjs/locale/pt-br'
-import Cookie from 'js-cookie'
+import React from 'react'
 import { ChevronLeft } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import dayjs from 'dayjs'
+import ptBR from 'dayjs/locale/pt-br'
 
 dayjs.locale(ptBR)
 
@@ -16,7 +15,7 @@ interface Memory {
   coverUrl: string
   excerpt: string
   createdAt: string
-  content: string // Add this line
+  content: string
 }
 
 interface MemoryPageProps {
