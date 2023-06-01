@@ -6,26 +6,26 @@ import { Camera } from 'lucide-react'
 
 interface EditMemoryProps {
   id: string
+
   token: any
-  setMemories: (memories: any) => void // Adicione a propriedade setMemories ao tipo
-  memories: any
+
   initialContent: string
+
   initialCoverUrl: string
+
   initialIsPublic: boolean
 }
 
-export default function Edit({
+export default function Edita({
   id,
   token,
-  setMemories,
-  memories,
   initialContent,
   initialCoverUrl,
   initialIsPublic,
 }: EditMemoryProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [content, setContent] = useState(initialContent)
-  const [coverUrl, setCoverUrl] = useState(initialCoverUrl)
+  const [coverUrl] = useState(initialCoverUrl)
   const [isPublic, setIsPublic] = useState(initialIsPublic)
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
   const [selectedImageUrl, setSelectedImageUrl] = useState(initialCoverUrl)
@@ -55,19 +55,6 @@ export default function Edit({
       )
 
       // Atualizar as memórias no estado local com os dados editados
-      setMemories((prevMemories) =>
-        prevMemories.map((memory) => {
-          if (memory.id === id) {
-            return {
-              ...memory,
-              content,
-              coverUrl: uploadedCoverUrl,
-              isPublic,
-            }
-          }
-          return memory
-        }),
-      )
 
       setIsEditing(false)
     } catch (error) {
@@ -118,7 +105,7 @@ export default function Edit({
                   accept="image/*"
                   id="media"
                   className="hidden"
-                  onChange={(e) => handleMediaSelect(e.target.files[0])}
+                  onChange={(e) => handleMediaSelect(e.target.files?.[0])}
                 />
                 {selectedImageUrl && (
                   <img

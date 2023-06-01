@@ -10,7 +10,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import Delete from '@/components/Delete'
-import Edit from '@/components/Edite'
+import Edita from '@/components/Edita'
 import { AutorMemorie } from '@/components/AutorMemorie'
 
 dayjs.locale(ptBr)
@@ -53,7 +53,7 @@ export default async function Home() {
                 {dayjs(memory.createdAt).format('D[ de ]MMMM[, ]YYYY')}
               </time>
               <div className="flex gap-3">
-                <Edit
+                <Edita
                   id={memory.id}
                   token={token}
                   initialContent={memory.excerpt}
