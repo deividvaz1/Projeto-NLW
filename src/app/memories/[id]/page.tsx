@@ -79,7 +79,7 @@ async function Memories({ params }) {
     },
   })
 
-  const memory: Memory = response.data // Correction: It should be 'memory' instead of 'memories'
+  const memory: Memory = response.data
 
   if (router.isFallback) {
     return <div>Carregando...</div>
@@ -95,27 +95,24 @@ async function Memories({ params }) {
           <ChevronLeft className="h-4 w-4" />
           Voltar à Timeline
         </Link>
-        <div key={memory.id} className="space-y-4">
+        <div key={memories.id} className="space-y-4">
           <div className="flex justify-between">
             <time className="-ml-8 flex items-center gap-2 text-sm text-gray-100 before:h-px before:w-5 before:bg-gray-50">
-              {dayjs(memory.createdAt).format('D[ de ]MMMM[, ]YYYY')}
+              {dayjs(memories.createdAt).format('D[ de ]MMMM[, ]YYYY')}
             </time>
           </div>
           <Image
-            src={memory.coverUrl}
+            src={memories.coverUrl}
             alt=""
             width={592}
             height={280}
             className="aspect-video w-full rounded-lg object-cover"
           />
           <p className="break-words text-lg leading-relaxed text-gray-100">
-            {memory.excerpt}{' '}
-            {/* Correction: It should be 'memory.excerpt' instead of 'memory.content' */}
+            {memory.content}
           </p>
         </div>
       </div>
     </div>
   )
 }
-
-export default Memories
