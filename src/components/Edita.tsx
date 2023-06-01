@@ -105,8 +105,14 @@ export default function Edita({
                   accept="image/*"
                   id="media"
                   className="hidden"
-                  onChange={(e) => handleMediaSelect(e.target.files?.[0])}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0]
+                    if (file) {
+                      handleMediaSelect(file)
+                    }
+                  }}
                 />
+
                 {selectedImageUrl && (
                   <img
                     src={selectedImageUrl}
