@@ -60,7 +60,7 @@ export default async function Home() {
                   initialCoverUrl={memory.coverUrl}
                   initialIsPublic={memory.isPublic}
                 />
-                <Delete id={memory.id} token={token} />
+                <Delete id={memory.id} token={token ?? ''} />
               </div>
             </div>
 
