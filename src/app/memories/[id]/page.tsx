@@ -6,7 +6,7 @@ import ptBR from 'dayjs/locale/pt-br'
 import Cookie from 'js-cookie'
 import { ChevronLeft } from 'lucide-react'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 dayjs.locale(ptBR)
@@ -18,55 +18,8 @@ interface Memory {
   createdAt: string
 }
 
-interface MemoriesPageProps {
-  memories: Memory[]
-}
-
 interface MemoryPageProps {
   memory: Memory
-}
-
-export async function getStaticProps({ params }) {
-  try {
-    const token = Cookie.get('token')
-    const response = await api.get(`/memories/${params.id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    const memory: Memory = response.data
-    return {
-      props: {
-        memory,
-      },
-    }
-  } catch (error) {
-    console.error('Error fetching memory:', error)
-    return {
-      props: {
-        memory: null,
-      },
-    }
-  }
-}
-
-export async function getStaticPaths() {
-  try {
-    const token = Cookie.get('token')
-    const response = await api.get('/memories', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    const memories: Memory[] = response.data
-    const paths = memories.map((memory) => ({
-      params: { id: memory.id },
-    }))
-    return { paths, fallback: false }
-  } catch (error) {
-    console.error('Error fetching memories:', error)
-    return { paths: [], fallback: false }
-  }
 }
 
 const MemoryPage: React.FC<MemoryPageProps> = ({ memory }) => {
