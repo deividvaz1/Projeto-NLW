@@ -20,6 +20,7 @@ interface Memory {
   coverUrl: string
   excerpt: string
   createdAt: string
+  isPublic: boolean
 }
 
 export default async function Home() {
