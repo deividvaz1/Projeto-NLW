@@ -20,16 +20,15 @@ export function NewMemoryForm() {
 
     let coverUrl = ''
 
-    if (fileToUpload) {
+    if (fileToUpload instanceof File && fileToUpload.name !== '') {
       const uploadFormData = new FormData()
       uploadFormData.set('file', fileToUpload)
 
-      // @ts-ignore-next-line
       uploadFormData.set('fileName', fileToUpload.name)
       uploadFormData.set('folder', 'nlw-spacetime')
 
       const uploadResponse = await api.post(
-        'https://upload.imagekit.io/api/v1/files/upload',
+        `${process.env.NEXT_PUBLIC_IMAGEKIT_UPLOAD_URL}`,
         uploadFormData,
         {
           headers: {
@@ -40,7 +39,6 @@ export function NewMemoryForm() {
 
       coverUrl = uploadResponse.data.url
     }
-
     const token = Cookie.get('token')
 
     setLoading(true)
