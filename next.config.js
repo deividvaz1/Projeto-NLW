@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     domains: [
@@ -6,6 +5,7 @@ const nextConfig = {
       '10.52.4.191',
       'github.com',
       'ik.imagekit.io',
+      'nlw-server-ivory.vercel.app', // Adicione o domínio aqui
     ],
   },
 }
