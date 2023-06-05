@@ -8,6 +8,19 @@ const nextConfig = {
       'nlw-server-ivory.vercel.app', // Adicione o domínio aqui
     ],
   },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: 'https://projeto-nlw-five.vercel.app/',
+          },
+        ],
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
