@@ -1,5 +1,5 @@
 ### (Finalizado) - 06/06/2023 -  Acesse por aqui : https://projeto-nlw-five.vercel.app/
-# NLW - SPACETIME > CÁPSULA DO TEMPO
+# NLW - SPACETIME
 <a href="https://imgur.com/DpGuc3P"><img src="https://i.imgur.com/DpGuc3P.png" title="source: imgur.com" /></a>
 ### Cápsula do Tempo. Colecione momentos marcantes da sua jornada e compartilhe (se quiser) com o mundo!
 
