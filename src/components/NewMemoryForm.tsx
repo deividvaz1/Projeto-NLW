@@ -33,7 +33,7 @@ export function NewMemoryForm() {
         uploadFormData,
         {
           headers: {
-            Authorization: `Basic ${process.env.NEXT_PUBLIC_IMAGEKIT_PRIVATE_KEY}`,
+            Authorization: `Basic cHJpdmF0ZV9lUVRkbmpzQ3ZLTXFpbXprR1NOWk9zcHJMczg9Og==`,
           },
         },
       )
