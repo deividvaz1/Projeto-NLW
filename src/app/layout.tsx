@@ -9,6 +9,7 @@ import { Profile } from '@/components/Profile'
 import { SignIn } from '@/components/SignIn'
 import { Copyright } from '@/components/Copyright'
 import { cookies } from 'next/headers'
+import { Search } from '@/components/SearchBar'
 
 const roboto = Roboto({ subsets: ['latin'], variable: '--font-roboto' })
 const baiJamjuree = BaiJamjuree({
@@ -33,10 +34,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       >
         <main className="grid min-h-screen lg:grid-cols-2">
           {/* GRID - DIREITA */}
-          <div className="relative flex flex-col items-start justify-between overflow-hidden border-r border-white/10 bg-[url(../assets/bg-stars.svg)] bg-cover px-28 py-16 ">
+          <div className=" relative flex flex-col items-start justify-between overflow-hidden border-r border-white/10 bg-[url(../assets/bg-stars.svg)] bg-cover px-28 py-16">
             <div className="moving-bg absolute right-0 top-1/2 h-[288px] w-[526px] -translate-y-1/2 translate-x-1/2 bg-green-700 opacity-60 blur-full" />
             <div className="absolute bottom-0 right-2 top-0 w-2 bg-stripes" />
             {isAuthenticated ? <Profile /> : <SignIn />}
+            <Search />
             <div className="h-200px w-200px bg-white"></div>
             <Hero />
             <Copyright />
