@@ -34,14 +34,24 @@ export default function Edita({
     try {
       let uploadedCoverUrl = coverUrl
 
-      if (selectedImage) {
+      if (selectedImage !== null) {
         const uploadFormData = new FormData()
         uploadFormData.append('file', selectedImage)
         // @ts-ignore-next-line
         uploadFormData.set('fileName', selectedImage.name)
         uploadFormData.set('folder', 'nlw-spacetime')
-        const uploadResponse = await api.post('/upload', uploadFormData)
-        uploadedCoverUrl = uploadResponse.data.fileUrl
+
+        const uploadResponse = await api.post(
+          'https://upload.imagekit.io/api/v1/files/upload',
+          uploadFormData,
+          {
+            headers: {
+              Authorization: `Basic cHJpdmF0ZV9FM2NtVDcxOFhWbzFmZTlvdHhsZ1NhUWlodms9Og==`,
+            },
+          },
+        )
+
+        uploadedCoverUrl = uploadResponse.data.url
       }
 
       await api.put(
@@ -64,7 +74,6 @@ export default function Edita({
     } catch (error) {
       // Tratar erro de edição
     }
-
     window.location.reload()
   }
 
