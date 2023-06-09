@@ -33,9 +33,13 @@ export default function Edita({
   const handleEdit = async () => {
     try {
       let uploadedCoverUrl = coverUrl
+
       if (selectedImage) {
         const uploadFormData = new FormData()
         uploadFormData.append('file', selectedImage)
+        // @ts-ignore-next-line
+        uploadFormData.set('fileName', selectedImage.name)
+        uploadFormData.set('folder', 'nlw-spacetime')
         const uploadResponse = await api.post('/upload', uploadFormData)
         uploadedCoverUrl = uploadResponse.data.fileUrl
       }
